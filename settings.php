@@ -25,11 +25,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-if ($hassiteconfig) {
-    $settings = new admin_settingpage('filter_textsubstitute_settings', new lang_string('pluginname', 'filter_textsubstitute'));
-
-    // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedIf
-    if ($ADMIN->fulltree) {
-        // TODO: Define actual plugin settings page and add it to the tree - {@link https://docs.moodle.org/dev/Admin_settings}.
-    }
+if ($ADMIN->fulltree) {
+    $settings->add(new admin_setting_configmulticheckbox('filter_textsubstitute/formats',
+        get_string('settingformats', 'filter_textsubstitute'),
+        get_string('settingformats_desc', 'filter_textsubstitute'),
+        [FORMAT_HTML => 1, FORMAT_MARKDOWN => 1, FORMAT_MOODLE => 1], format_text_menu())
+    );
 }

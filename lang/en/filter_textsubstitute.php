@@ -27,3 +27,5 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Text substitute';
 $string['filtername'] = 'Text substitute';
+$string['settingformats'] = 'Apply to formats';
+$string['settingformats_desc'] = 'The filter will be applied only if the original text was inserted in one of the selected formats.';

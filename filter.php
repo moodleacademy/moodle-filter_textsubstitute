@@ -34,12 +34,30 @@ class filter_textsubstitute extends moodle_text_filter {
      * @return string text after processing
      */
     public function filter($text, array $options = []) {
+        if (!isset($options['originalformat'])) {
+            // If the format is not specified, we do nothing.
+            return $text;
+        }
+
+        if (in_array($options['originalformat'], explode(',', get_config('filter_textsubstitute', 'formats')))) {
+            // Return the modified text.
+            return $this->substitute_term($text);
+        }
+
+        return $text;
+    }
+
+    /**
+     * Substitute a term with another.
+     *
+     * @param string $text to modify
+     * @return string the modified result
+     */
+    protected function substitute_term($text) {
         $searchterm = 'Moodle';
         $replacewith = 'UniLearn';
 
         $text = str_replace($searchterm, $replacewith, $text);
-
-        // Return the modified text.
         return $text;
     }
 }
