@@ -15,15 +15,31 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Plugin strings are defined here.
+ * Filter to substitute text.
  *
  * @package     filter_textsubstitute
- * @category    string
+ * @category    admin
  * @copyright   2023 Your Name <you@example.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Text substitute';
-$string['filtername'] = 'Text substitute';
+class filter_textsubstitute extends moodle_text_filter {
+    /**
+     * Apply the filter to the text
+     *
+     * @see filter_manager::apply_filter_chain()
+     * @param string $text to be processed by the text
+     * @param array $options filter options
+     * @return string text after processing
+     */
+    public function filter($text, array $options = []) {
+        $searchterm = 'Moodle';
+        $replacewith = 'UniLearn';
+
+        $text = str_replace($searchterm, $replacewith, $text);
+
+        // Return the modified text.
+        return $text;
+    }
+}
