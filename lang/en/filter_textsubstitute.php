@@ -33,3 +33,4 @@ $string['settingsubstituteterm'] = 'Substitute term';
 $string['settingsubstituteterm_help'] = 'The new term to substitute the old term with.';
 $string['settingformats'] = 'Apply to formats';
 $string['settingformats_desc'] = 'The filter will be applied only if the original text was inserted in one of the selected formats.';
+$string['privacy:metadata'] = 'The Text substitute plugin does not store any personal data.';
