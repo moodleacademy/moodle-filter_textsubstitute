@@ -1,8 +1,8 @@
 # Text substitute #
 
-TODO Describe the plugin shortly here.
+A simple text filter to substitute a given term with another.
 
-TODO Provide more detailed description here.
+This filter will substitute a given term with another. This is a sample plugin created for use in Moodle Academy courses.
 
 ## Installing via uploaded ZIP file ##
 
