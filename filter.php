@@ -23,7 +23,6 @@
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-
 class filter_textsubstitute extends moodle_text_filter {
     /**
      * Apply the filter to the text
@@ -34,14 +33,18 @@ class filter_textsubstitute extends moodle_text_filter {
      * @return string text after processing
      */
     public function filter($text, array $options = []) {
-        if (!isset($options['originalformat'])) {
-            // If the format is not specified, we do nothing.
+        $searchterm = get_config('filter_textsubstitute', 'searchterm');
+
+        // If the format is not specified or search term is empty, we do nothing.
+        if (!isset($options['originalformat']) || empty($searchterm)) {
             return $text;
         }
 
         if (in_array($options['originalformat'], explode(',', get_config('filter_textsubstitute', 'formats')))) {
+            $replacewith = get_config('filter_textsubstitute', 'substituteterm');
+
             // Return the modified text.
-            return $this->substitute_term($text);
+            return $this->substitute_term($text, $searchterm, $replacewith);
         }
 
         return $text;
@@ -50,13 +53,12 @@ class filter_textsubstitute extends moodle_text_filter {
     /**
      * Substitute a term with another.
      *
-     * @param string $text to modify
+     * @param string $text - text to modify
+     * @param string $searchterm - term to replace
+     * @param string $replacewith - term to substitute with
      * @return string the modified result
      */
-    protected function substitute_term($text) {
-        $searchterm = 'Moodle';
-        $replacewith = 'UniLearn';
-
+    protected function substitute_term($text, string $searchterm, string $replacewith) {
         $text = str_replace($searchterm, $replacewith, $text);
         return $text;
     }
