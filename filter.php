@@ -33,7 +33,9 @@ class filter_textsubstitute extends moodle_text_filter {
      * @return string text after processing
      */
     public function filter($text, array $options = []) {
-        $searchterm = get_config('filter_textsubstitute', 'searchterm');
+        $config = get_config('filter_textsubstitute'); // Get for configs for this plugin.
+        $searchterm = $config->searchterm;
+        $replacewith = $config->substituteterm;
 
         // If the format is not specified or search term is empty, we do nothing.
         if (!isset($options['originalformat']) || empty($searchterm)) {
@@ -41,8 +43,6 @@ class filter_textsubstitute extends moodle_text_filter {
         }
 
         if (in_array($options['originalformat'], explode(',', get_config('filter_textsubstitute', 'formats')))) {
-            $replacewith = get_config('filter_textsubstitute', 'substituteterm');
-
             // Return the modified text.
             return $this->substitute_term($text, $searchterm, $replacewith);
         }
