@@ -34,10 +34,10 @@ require_once($CFG->dirroot . '/filter/textsubstitute/filter.php'); // Include th
 class filter_test extends \advanced_testcase {
 
     /**
-     * Check that search terms are subsituted with another given term when filtered.
+     * Check that search terms are substituted with another given term when filtered.
      *
      * @param string $text Original text
-     * @param string $filteredtextpattern Text pattern after display H5P filter
+     * @param string $filteredtextpattern Text after applying filter
      * @dataProvider filter_textsubstitute_provider
      *
      * @covers ::filter()
