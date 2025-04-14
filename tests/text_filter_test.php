@@ -16,13 +16,6 @@
 
 namespace filter_textsubstitute;
 
-use filter_textsubstitute;
-
-defined('MOODLE_INTERNAL') || die();
-
-global $CFG;
-require_once($CFG->dirroot . '/filter/textsubstitute/filter.php'); // Include the code to test.
-
 /**
  * Unit tests for Text substitute filter.
  *
@@ -31,7 +24,7 @@ require_once($CFG->dirroot . '/filter/textsubstitute/filter.php'); // Include th
  * @copyright   2023 Your Name <you@example.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class filter_test extends \advanced_testcase {
+final class text_filter_test extends \advanced_testcase {
 
     /**
      * Check that search terms are substituted with another given term when filtered.
@@ -42,7 +35,8 @@ class filter_test extends \advanced_testcase {
      *
      * @covers ::filter()
      */
-    public function test_filter_textsubstitute($searchterm, $substituteterm, $formats, $originalformat, $inputtext, $expectedtext) {
+    public function test_filter_textsubstitute(
+            $searchterm, $substituteterm, $formats, $originalformat, $inputtext, $expectedtext): void {
         $this->resetAfterTest(true);
         $this->setAdminUser();
 
@@ -51,7 +45,7 @@ class filter_test extends \advanced_testcase {
         set_config('substituteterm', $substituteterm, 'filter_textsubstitute');
         set_config('formats', $formats, 'filter_textsubstitute');
 
-        $filterplugin = new filter_textsubstitute(null, []);
+        $filterplugin = new text_filter(null, []);
 
         // Filter the text.
         $filteredtext = $filterplugin->filter($inputtext, ['originalformat' => $originalformat]);
@@ -65,7 +59,7 @@ class filter_test extends \advanced_testcase {
      *
      * @return string[]
      */
-    public function filter_textsubstitute_provider(): array {
+    public static function filter_textsubstitute_provider(): array {
         return [
             'All formats allowed - html' => [
                 'searchterm' => 'Moodle',

@@ -18,48 +18,10 @@
  * Filter to substitute text.
  *
  * @package     filter_textsubstitute
- * @category    admin
  * @copyright   2023 Your Name <you@example.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-class filter_textsubstitute extends moodle_text_filter {
-    /**
-     * Apply the filter to the text
-     *
-     * @see filter_manager::apply_filter_chain()
-     * @param string $text to be processed by the text
-     * @param array $options filter options
-     * @return string text after processing
-     */
-    public function filter($text, array $options = []) {
-        $config = get_config('filter_textsubstitute'); // Get for configs for this plugin.
-        $searchterm = $config->searchterm;
-        $replacewith = $config->substituteterm;
+defined('MOODLE_INTERNAL') || die();
 
-        // If the format is not specified or search term is empty, we do nothing.
-        if (!isset($options['originalformat']) || empty($searchterm)) {
-            return $text;
-        }
-
-        if (in_array($options['originalformat'], explode(',', get_config('filter_textsubstitute', 'formats')))) {
-            // Return the modified text.
-            return $this->substitute_term($text, $searchterm, $replacewith);
-        }
-
-        return $text;
-    }
-
-    /**
-     * Substitute a term with another.
-     *
-     * @param string $text - text to modify
-     * @param string $searchterm - term to replace
-     * @param string $replacewith - term to substitute with
-     * @return string the modified result
-     */
-    protected function substitute_term($text, string $searchterm, string $replacewith) {
-        $text = str_replace($searchterm, $replacewith, $text);
-        return $text;
-    }
-}
+debugging('This file is no longer required in Moodle 4.5+. Please do not include/require it.', DEBUG_DEVELOPER);
