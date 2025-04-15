@@ -23,7 +23,7 @@ namespace filter_textsubstitute;
  * @copyright  2023 Your Name <you@example.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class text_filter extends \moodle_text_filter {
+class text_filter extends \core_filters\text_filter {
     /**
      * Apply the filter to the text
      *
